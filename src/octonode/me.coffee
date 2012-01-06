@@ -121,5 +121,11 @@ class Me
     @client.del "/user/keys/#{id}", (s, b) ->
       if s isnt 204 then throw new Error 'User delKey error'
 
+  # Create repository
+  # '/user/repos' POST
+  createRepository: (args={name:''}, cb) ->
+    @client.post '/user/repos', args, (s, b) ->
+      if s isnt 201 then throw new Error 'User createRepository error' else cb b
+
 # Export module
 module.exports = Me

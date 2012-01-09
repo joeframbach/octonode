@@ -14,8 +14,9 @@ class Organization
   # Get an organization
   # '/orgs/flatiron' GET
   info: (cb) ->
-    @client.get "/orgs/#{@name}", (s, b) ->
-      if s isnt 200 then throw new Error 'Organization info error' else cb b
+    @client.get "/orgs/#{@name}", (err, s, b)  ->
+      return cb(err) if err
+      if s isnt 200 then cb(new Error('Organization info error')) else cb null, b
 
 # Export module
 module.exports = Organization
